@@ -9,3 +9,84 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  password      String
+  fullname      String
+  role          UserRole  @default(Normal)
+  orders        Order[]
+  likedFoods    Like[]
+  disLikedFoods disLike[]
+  comments      Comment[]
+}
+
+enum UserRole {
+  Admin
+  Normal
+}
+
+model Order {
+  id                    Int         @id @default(autoincrement())
+  Status                OrderStatus
+  TotalPrice            Int
+  DeliveredTimeInMinute Int
+  user                  User        @relation(fields: [userId], references: [id])
+  userId                Int
+  foods                 FoodOrder[]
+}
+
+enum OrderStatus {
+  InCart
+  Registered
+  Approved
+  Delivered
+}
+
+model Food {
+  id             Int         @id @default(autoincrement())
+  name           String
+  price          Int
+  availableCount Int
+  description    String
+  orders         FoodOrder[]
+  likes          Like[]
+  disLikes       disLike[]
+  comments       Comment[]
+}
+
+model FoodOrder {
+  id      Int   @id @default(autoincrement())
+  food    Food  @relation(fields: [foodId], references: [id])
+  foodId  Int
+  order   Order @relation(fields: [orderId], references: [id])
+  orderId Int
+  count   Int   @default(0)
+}
+
+model Like {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  food   Food @relation(fields: [foodId], references: [id])
+  foodId Int
+}
+
+model disLike {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  food   Food @relation(fields: [foodId], references: [id])
+  foodId Int
+}
+
+model Comment {
+  id      Int      @id @default(autoincrement())
+  content String
+  date    DateTime
+  user    User     @relation(fields: [userId], references: [id])
+  userId  Int
+  food    Food     @relation(fields: [foodId], references: [id])
+  foodId  Int
+}

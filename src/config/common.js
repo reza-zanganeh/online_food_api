@@ -35,5 +35,4 @@ module.exports = {
   otpCode,
   cloud,
   authentication,
-  invalidPasswordOrCode,
 }

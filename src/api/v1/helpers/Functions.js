@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 const projectConfig = require("../../../config/index")
 
 module.exports.createRandomNumber = (min, max) => {
@@ -37,18 +38,10 @@ module.exports.createCaptchaToken = (text) => {
   return token
 }
 
-module.exports.createAuthenticationToken = (id, role, isBlock) => {
-  const token = jwt.sign(
-    {
-      id,
-      role,
-      isBlock,
-    },
-    projectConfig.authentication.tokenKey,
-    {
-      expiresIn: `${projectConfig.authentication.authenticationTokenExpiresTimeInMinute}m`,
-    }
-  )
+module.exports.createAuthenticationToken = (data) => {
+  const token = jwt.sign(data, projectConfig.authentication.tokenKey, {
+    expiresIn: `${projectConfig.authentication.authenticationTokenExpiresTimeInMinute}m`,
+  })
   return token
 }
 
@@ -66,4 +59,22 @@ module.exports.sumOfArrayElements = (numbers) => {
     (previousValue, currentValue) => previousValue + currentValue,
     0
   )
+}
+
+module.exports.hashUserPassword = async (password) => {
+  try {
+    const hashedPass = await bcrypt.hash(password, 10)
+    return hashedPass
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports.compareUserPassword = async (passOne, passTwo) => {
+  try {
+    const resultOfcomparePassword = await bcrypt.compare(passOne, passTwo)
+    return resultOfcomparePassword
+  } catch (error) {
+    throw error
+  }
 }

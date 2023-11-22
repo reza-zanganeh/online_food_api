@@ -22,11 +22,3 @@ module.exports.isAuthenticate = async (req, res, next) => {
     next(createError(Unauthorized()))
   }
 }
-
-// add invalid token user to redis
-// check in isAuthenticate middleware
-// if exist user id
-// message login again
-// else continue
-// remove from array in login
-//
