@@ -1,17 +1,10 @@
 const { modelName } = require("../../../config/Constant")
-const { teamAssetsModelName } = modelName
 const { createError } = require("./Functions")
 const {
   resposeHandler,
   internalServerErrorHandler,
 } = require("./responseHandler")
-const {
-  InternalServerError,
-  Created,
-  Ok,
-  BadRequest,
-  emptyMesssage,
-} = require("./HttpResponse")
+const { Created, Ok, BadRequest, emptyMesssage } = require("./HttpResponse")
 
 const {
   create,
@@ -73,15 +66,20 @@ const readController = async (MODELNAME, req, res, next) => {
 const readRecordsSortedByDateWithPaginationController = async (
   MODELNAME,
   take,
+
   req,
   res,
   next
 ) => {
   try {
     const page = req.query.page || 1
+    const orderByKey = req.query.orderBy || "id"
+    const orderBy = {}
+    orderBy[orderByKey] = "asc"
     const records = await readRecordsSortedByDateWithPagination(
       MODELNAME.english,
       take,
+      orderBy,
       page
     )
     resposeHandler(res, records, emptyMesssage())
@@ -130,130 +128,6 @@ const deleteController = async (MODELNAME, req, res, next) => {
   }
 }
 
-const getTeamAssetsWithPriceForUpgrade = async (MODELNAME, req, res, next) => {
-  try {
-    const { role } = req.user
-    const records = await readAll(MODELNAME.english)
-    let correctedRecords = records
-    const teamAssets = req.team
-      ? await readOne(teamAssetsModelName.english, {
-          teamId: +req.team.id,
-        })
-      : {}
-    if (teamAssets?.[`${MODELNAME.english}Id`] && role !== "Admin") {
-      const assetId = teamAssets[`${MODELNAME.english}Id`]
-      const currentAsset = await readOne(MODELNAME.english, {
-        id: +assetId,
-      })
-      correctedRecords = records.filter((record) => {
-        if (+record.level > +currentAsset.level) {
-          record.priceToUpgrade = record.price - currentAsset.price
-          return true
-        } else return false
-      })
-    }
-
-    resposeHandler(
-      res,
-      correctedRecords,
-      Ok({ operationName: `خواندن ${MODELNAME.persian}` })
-    )
-  } catch (error) {
-    internalServerErrorHandler(next, error)
-  }
-}
-
-const buyTeamAsset = async (MODELNAME, req, res, next) => {
-  try {
-    const { id: teamId, coinCount, teamMembershipType } = req.team
-    const teamAssets = await readOne(teamAssetsModelName.english, {
-      teamId: +teamId,
-    })
-    const prevAssetId = teamAssets[`${MODELNAME.english}Id`]
-    const {
-      id: newAssetId,
-      price: newAssetPrice,
-      level: newAssetLevel,
-    } = req[MODELNAME.english]
-
-    if (+newAssetLevel > 2 && teamMembershipType === "Normal")
-      return next(
-        createError(
-          BadRequest(
-            `خرید ${MODELNAME.persian} در سطح ${newAssetLevel} فقط برای کاربران نقره ای . طلایی و الماسی امکان پذیر می باشد`
-          )
-        )
-      )
-
-    if (+newAssetLevel > 3 && teamMembershipType === "Silver")
-      return next(
-        createError(
-          BadRequest(
-            `خرید ${MODELNAME.persian} در سطح ${newAssetLevel} فقط برای کاربران  طلایی و الماسی امکان پذیر می باشد`
-          )
-        )
-      )
-    if (+newAssetLevel > 4 && teamMembershipType === "Golden")
-      return next(
-        createError(
-          BadRequest(
-            `خرید ${MODELNAME.persian} در سطح ${newAssetLevel} فقط برای کاربران الماسی امکان پذیر می باشد`
-          )
-        )
-      )
-
-    let coinCountToPay
-    if (prevAssetId) {
-      const prevAsset = await readOne(MODELNAME.english, { id: +prevAssetId })
-      coinCountToPay = newAssetPrice - prevAsset.price
-    } else {
-      coinCountToPay = newAssetPrice
-    }
-
-    if (coinCountToPay <= 0)
-      return next(
-        createError(
-          BadRequest(
-            `سطح ${MODELNAME.persian} از سطح ${MODELNAME.persian} مورد نظر بالاتر یا برابر می باشد`
-          )
-        )
-      )
-
-    if (coinCountToPay > coinCount)
-      return next(
-        createError(
-          BadRequest(
-            `موجودی سکه شما کافی نمی باشد . برای این خرید شما نیاز به ${
-              coinCount - coinCountToPay
-            } سکه بیشتر دارید`
-          )
-        )
-      )
-
-    const newCoinCount = coinCount - coinCountToPay
-
-    const updatedTeamData = { coinCount: newCoinCount }
-    const updatedAssetsTeamData = {}
-    updatedAssetsTeamData[`${MODELNAME.english}Id`] = +newAssetId
-    await update("team", { id: +teamId }, updatedTeamData)
-    await update(
-      teamAssetsModelName.english,
-      { teamId: +teamId },
-      updatedAssetsTeamData
-    )
-
-    const resposeData = { coinCountToPay }
-    resposeData[`${MODELNAME.english}Id`] = newAssetId
-    resposeHandler(
-      res,
-      resposeData,
-      Ok({ operationName: `خرید ${MODELNAME.persian} جدید` })
-    )
-  } catch (error) {
-    internalServerErrorHandler(next, error)
-  }
-}
-
 module.exports = (MODELNAME) => ({
   createController: createController.bind(null, MODELNAME),
   readController: readController.bind(null, MODELNAME),
@@ -262,9 +136,4 @@ module.exports = (MODELNAME) => ({
   updateConrtoller: updateConrtoller.bind(null, MODELNAME),
   deleteController: deleteController.bind(null, MODELNAME),
   readWithIdController: readWithIdController.bind(null, MODELNAME),
-  getTeamAssetsWithPriceForUpgrade: getTeamAssetsWithPriceForUpgrade.bind(
-    null,
-    MODELNAME
-  ),
-  buyTeamAsset: buyTeamAsset.bind(null, MODELNAME),
 })

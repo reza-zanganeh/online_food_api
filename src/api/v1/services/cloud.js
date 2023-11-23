@@ -55,7 +55,7 @@ const deleteObjectFromCloud = async (Bucket, Key) => {
   }
 }
 
-module.exports.getPresignedUrlToUploadUserProfilePiture = async (fileName) => {
+module.exports.getPresignedUrlToUploadFoodPicture = async (fileName) => {
   try {
     const uuid = uuidV4()
     const Key = `${uuid}_${fileName}`
@@ -70,54 +70,7 @@ module.exports.getPresignedUrlToUploadUserProfilePiture = async (fileName) => {
   }
 }
 
-module.exports.getPresignedUrlToUploadGroupPostPicture = async (fileName) => {
-  try {
-    const uuid = uuidV4()
-    const Key = `${uuid}_${fileName}`
-    const result = await getPresignedUrlToUpload(
-      uuid,
-      Key,
-      projectConfig.cloud.bucket.footballManagerGroupPostPicture
-    )
-    return { ...result, Key }
-  } catch (error) {
-    throw error
-  }
-}
-
-module.exports.getPresignedUrlToUploadGroupAndChannelProfilePicture = async (
-  fileName
-) => {
-  try {
-    const uuid = uuidV4()
-    const Key = `${uuid}_${fileName}`
-    const result = await getPresignedUrlToUpload(
-      uuid,
-      Key,
-      projectConfig.cloud.bucket.groupAndChennelProfilePicture
-    )
-    return { ...result, Key }
-  } catch (error) {
-    throw error
-  }
-}
-
-module.exports.getPresignedUrlToUploadPlayerFacePiture = async (fileName) => {
-  try {
-    const uuid = uuidV4()
-    const Key = `${uuid}_${fileName}`
-    const result = await getPresignedUrlToUpload(
-      uuid,
-      Key,
-      projectConfig.cloud.bucket.playerFacePicture
-    )
-    return { ...result, Key }
-  } catch (error) {
-    throw error
-  }
-}
-
-module.exports.deletePlayerFacePictureFromCloud = async (Key) => {
+module.exports.deleteFoodPictureFromCloud = async (Key) => {
   try {
     const result = await deleteObjectFromCloud(
       projectConfig.cloud.bucket.playerFacePicture,

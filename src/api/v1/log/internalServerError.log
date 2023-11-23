@@ -1,0 +1,28 @@
+
+ ================== ۱۴۰۲-۰۹-۰۲ ۰۰:۴۰:۲۸ ق ظ ================== 
+
+Invalid `prisma[modelName].findMany()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\helpers\prisma.js:46:45
+
+  43 ) => {
+  44   try {
+  45     const skip = (page - 1) * take
+→ 46     const records = await prisma[modelName].findMany({
+           skip: 0,
+           take: 10,
+           orderBy: {
+             date: "asc",
+             ~~~~
+         ?   id?: SortOrder,
+         ?   name?: SortOrder,
+         ?   price?: SortOrder,
+         ?   availableCount?: SortOrder,
+         ?   description?: SortOrder,
+         ?   orders?: FoodOrderOrderByRelationAggregateInput,
+         ?   likes?: LikeOrderByRelationAggregateInput,
+         ?   disLikes?: disLikeOrderByRelationAggregateInput,
+         ?   comments?: CommentOrderByRelationAggregateInput
+           }
+         })
+
+Unknown argument `date`. Did you mean `name`? Available options are marked with ?.
