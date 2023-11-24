@@ -1,9 +1,15 @@
 const express = require("express")
 const { checkSchema } = require("express-validator")
 const { expressValidationResultHandler } = require("../helpers/responseHandler")
-const { login, register } = require("../controller/authentication")
+const {
+  login,
+  register,
+  getUserInformation,
+} = require("../controller/authentication")
 
 const { loginVS, registerVS } = require("../validations/authentication")
+const { authentication } = require("../../../config/common")
+const { isAuthenticate } = require("../middleware/athentication")
 
 const authenticationRouter = express.Router()
 
@@ -20,5 +26,7 @@ authenticationRouter.post(
   expressValidationResultHandler,
   login
 )
+
+authenticationRouter.get("/", isAuthenticate, getUserInformation)
 
 module.exports.authenticationRouter = authenticationRouter

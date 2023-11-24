@@ -15,6 +15,7 @@ model User {
   username      String    @unique
   password      String
   fullname      String
+  address       String
   role          UserRole  @default(Normal)
   orders        Order[]
   likedFoods    Like[]
@@ -29,9 +30,9 @@ enum UserRole {
 
 model Order {
   id                    Int         @id @default(autoincrement())
-  Status                OrderStatus
-  TotalPrice            Int
-  DeliveredTimeInMinute Int
+  Status                OrderStatus @default(InCart)
+  TotalPrice            Int         @default(0)
+  DeliveredTimeInMinute Int         @default(0)
   user                  User        @relation(fields: [userId], references: [id])
   userId                Int
   foods                 FoodOrder[]
@@ -41,7 +42,6 @@ enum OrderStatus {
   InCart
   Registered
   Approved
-  Delivered
 }
 
 model Food {
@@ -62,7 +62,7 @@ model FoodOrder {
   foodId  Int
   order   Order @relation(fields: [orderId], references: [id])
   orderId Int
-  count   Int   @default(0)
+  count   Int   @default(1)
 }
 
 model Like {
@@ -84,7 +84,7 @@ model disLike {
 model Comment {
   id      Int      @id @default(autoincrement())
   content String
-  date    DateTime
+  date    DateTime @default(now())
   user    User     @relation(fields: [userId], references: [id])
   userId  Int
   food    Food     @relation(fields: [foodId], references: [id])

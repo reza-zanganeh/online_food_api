@@ -95,3 +95,17 @@ module.exports.login = async (req, res, next) => {
     internalServerErrorHandler(next, error)
   }
 }
+
+module.exports.getUserInformation = async (req, res, next) => {
+  try {
+    const userId = +req.user.id
+
+    const userInfo = await user.findFirst({
+      where: { id: userId },
+      select: { username: true, fullname: true, role: true, address: true },
+    })
+    resposeHandler(res, userInfo, Ok({ operationName: "دریافت اطلاعات کاربر" }))
+  } catch (error) {
+    internalServerErrorHandler(next, error)
+  }
+}
