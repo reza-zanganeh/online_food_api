@@ -26,3 +26,530 @@ G:\nodejsCode\online_food_api\src\api\v1\helpers\prisma.js:46:45
          })
 
 Unknown argument `date`. Did you mean `name`? Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۳۸:۵۰ ق ظ ================== 
+
+Invalid `user.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\authentication.js:43:32
+
+  40   )
+  41 
+  42 const hashedUserPassword = hashUserPassword(password)
+→ 43 const newUser = await user.create({
+       data: {
+         username: "ali",
+         fullname: "ali sani",
+         password: {},
+                   ~~
+         role: "Normal"
+       }
+     })
+
+Argument `password`: Invalid value provided. Expected String, provided Object.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۴۰:۱۰ ق ظ ================== 
+
+Invalid `user.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\authentication.js:43:32
+
+  40   )
+  41 
+  42 const hashedUserPassword = hashUserPassword(password)
+→ 43 const newUser = await user.create({
+       data: {
+         username: "ali",
+         fullname: "ali sani",
+         password: {},
+                   ~~
+         role: "Normal"
+       }
+     })
+
+Argument `password`: Invalid value provided. Expected String, provided Object.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۴۰:۲۲ ق ظ ================== 
+
+Invalid `user.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\authentication.js:43:32
+
+  40   )
+  41 
+  42 const hashedUserPassword = hashUserPassword(password)
+→ 43 const newUser = await user.create({
+       data: {
+         username: "ali",
+         fullname: "ali sani",
+         password: {},
+                   ~~
+         role: "Normal"
+       }
+     })
+
+Argument `password`: Invalid value provided. Expected String, provided Object.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۵۰:۵۵ ق ظ ================== 
+resposeHandler is not defined
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۵۱:۲۸ ق ظ ================== 
+resposeHandler is not defined
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۵۸:۳۴ ق ظ ================== 
+
+Invalid `order.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:101:37
+
+   98 if (selectedFood.availableCount <= 0)
+   99   return next(createError(BadRequest("غذا انتخابی شما موجود نمی باشد")))
+  100 
+→ 101 const currentCart = await order.findUnique({
+        where: {
+          user: {
+            id: 2
+          },
+          Status: "InCart",
+      ?   id?: Int,
+      ?   AND?: OrderWhereInput | OrderWhereInput[],
+      ?   OR?: OrderWhereInput[],
+      ?   NOT?: OrderWhereInput | OrderWhereInput[],
+      ?   TotalPrice?: IntFilter | Int,
+      ?   DeliveredTimeInMinute?: IntFilter | Int,
+      ?   userId?: IntFilter | Int,
+      ?   foods?: FoodOrderListRelationFilter
+        }
+      })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۸:۵۸:۵۶ ق ظ ================== 
+
+Invalid `order.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:101:37
+
+   98 if (selectedFood.availableCount <= 0)
+   99   return next(createError(BadRequest("غذا انتخابی شما موجود نمی باشد")))
+  100 
+→ 101 const currentCart = await order.findUnique({
+        where: {
+          user: {
+            id: 2
+          },
+          Status: "InCart",
+      ?   id?: Int,
+      ?   AND?: OrderWhereInput | OrderWhereInput[],
+      ?   OR?: OrderWhereInput[],
+      ?   NOT?: OrderWhereInput | OrderWhereInput[],
+      ?   TotalPrice?: IntFilter | Int,
+      ?   DeliveredTimeInMinute?: IntFilter | Int,
+      ?   userId?: IntFilter | Int,
+      ?   foods?: FoodOrderListRelationFilter
+        }
+      })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۰۰:۴۰ ق ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:127:29
+
+  124       },
+  125     })
+  126 } else {
+→ 127   newCart = await order.create(
+The required connected records were not found. Expected 1 records to be connected after connect operation on one-to-many relation 'FoodOrderToOrder', found 0.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۰۶:۲۹ ق ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:127:29
+
+  124       },
+  125     })
+  126 } else {
+→ 127   newCart = await order.create({
+          data: {
+            userId: 2,
+            foods: {
+              connect: {
+                food: {
+                  id: 2
+                }
+              }
+              ~~~~~~~~~~~~~~~
+            },
+            TotalPrice: 1235
+          }
+        })
+
+Argument `connect`: Invalid value provided. Expected FoodOrderWhereUniqueInput[], provided Object.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۰۶:۵۹ ق ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:127:29
+
+  124       },
+  125     })
+  126 } else {
+→ 127   newCart = await order.create(
+The required connected records were not found. Expected 1 records to be connected after connect operation on one-to-many relation 'FoodOrderToOrder', found 0.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۰۸:۱۴ ق ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:128:29
+
+  125     })
+  126 } else {
+  127   console.log("selectedFood.id", selectedFood.id)
+→ 128   newCart = await order.create(
+The required connected records were not found. Expected 1 records to be connected after connect operation on one-to-many relation 'FoodOrderToOrder', found 0.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۱۱:۰۸ ق ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:129:29
+
+  126     })
+  127 } else {
+  128   console.log("selectedFood.id", selectedFood.id)
+→ 129   newCart = await order.create(
+The required connected records were not found. Expected 1 records to be connected after connect operation on one-to-many relation 'FoodOrderToOrder', found 0.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۱۹:۱۵ ق ظ ================== 
+
+Invalid `foodOrder.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:111:47
+
+  108 })
+  109 if (currentCart) {
+  110   // check food exists or not
+→ 111   const foodOrderRecord = await foodOrder.findUnique({
+          where: {
+            foodId: 2,
+            orderId: 5,
+        ?   id?: Int,
+        ?   AND?: FoodOrderWhereInput | FoodOrderWhereInput[],
+        ?   OR?: FoodOrderWhereInput[],
+        ?   NOT?: FoodOrderWhereInput | FoodOrderWhereInput[],
+        ?   count?: IntFilter | Int,
+        ?   food?: FoodRelationFilter | FoodWhereInput,
+        ?   order?: OrderRelationFilter | OrderWhereInput
+          }
+        })
+
+Argument `where` of type FoodOrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۰۹:۲۰:۱۰ ق ظ ================== 
+
+Invalid `foodOrder.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:112:47
+
+  109 })
+  110 if (currentCart) {
+  111   // check food exists or not
+→ 112   const foodOrderRecord = await foodOrder.findUnique({
+          where: {
+            foodId: 2,
+            orderId: 5,
+        ?   id?: Int,
+        ?   AND?: FoodOrderWhereInput | FoodOrderWhereInput[],
+        ?   OR?: FoodOrderWhereInput[],
+        ?   NOT?: FoodOrderWhereInput | FoodOrderWhereInput[],
+        ?   count?: IntFilter | Int,
+        ?   food?: FoodRelationFilter | FoodWhereInput,
+        ?   order?: OrderRelationFilter | OrderWhereInput
+          }
+        })
+
+Argument `where` of type FoodOrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۳۵:۵۹ ب ظ ================== 
+response is not defined
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۴۱:۲۸ ب ظ ================== 
+
+Invalid `order.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:18:37
+
+  15 module.exports.getMyCart = async (req, res, next) => {
+  16   try {
+  17     const userId = +req.user.id
+→ 18     const currentCart = await order.findUnique({
+           where: {
+             userId: 2,
+             Status: "InCart",
+         ?   id?: Int,
+         ?   AND?: OrderWhereInput | OrderWhereInput[],
+         ?   OR?: OrderWhereInput[],
+         ?   NOT?: OrderWhereInput | OrderWhereInput[],
+         ?   TotalPrice?: IntFilter | Int,
+         ?   DeliveredTimeInMinute?: IntFilter | Int,
+         ?   user?: UserRelationFilter | UserWhereInput,
+         ?   foods?: FoodOrderListRelationFilter
+           },
+           select: {
+             id: true,
+             TotalPrice: true,
+             foods: {
+               select: {
+                 food: {
+                   select: {
+                     name: true,
+                     price: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۴۲:۲۵ ب ظ ================== 
+
+Invalid `order.findUnique()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:18:37
+
+  15 module.exports.getMyCart = async (req, res, next) => {
+  16   try {
+  17     const userId = +req.user.id
+→ 18     const currentCart = await order.findUnique({
+           where: {
+             userId: 2,
+             Status: "InCart",
+         ?   id?: Int,
+         ?   AND?: OrderWhereInput | OrderWhereInput[],
+         ?   OR?: OrderWhereInput[],
+         ?   NOT?: OrderWhereInput | OrderWhereInput[],
+         ?   TotalPrice?: IntFilter | Int,
+         ?   DeliveredTimeInMinute?: IntFilter | Int,
+         ?   user?: UserRelationFilter | UserWhereInput,
+         ?   foods?: FoodOrderListRelationFilter
+           },
+           select: {
+             id: true,
+             TotalPrice: true,
+             foods: {
+               select: {
+                 food: {
+                   select: {
+                     name: true,
+                     price: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۴۴:۲۹ ب ظ ================== 
+Cannot read properties of undefined (reading '0')
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۵۲:۲۷ ب ظ ================== 
+Cannot read properties of undefined (reading 'push')
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۲:۵۲:۴۴ ب ظ ================== 
+Cannot read properties of undefined (reading 'push')
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۳:۰۶:۵۴ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:78:35
+
+  75 module.exports.payOrderByUser = async (req, res, next) => {
+  76   try {
+  77     const userId = +req.user.id
+→ 78     const paidOrder = await order.update({
+           where: {
+             userId: 2,
+             Status: "InCart",
+             TotalPrice: {
+               gt: 0
+             },
+         ?   id?: Int,
+         ?   AND?: OrderWhereInput | OrderWhereInput[],
+         ?   OR?: OrderWhereInput[],
+         ?   NOT?: OrderWhereInput | OrderWhereInput[],
+         ?   DeliveredTimeInMinute?: IntFilter | Int,
+         ?   user?: UserRelationFilter | UserWhereInput,
+         ?   foods?: FoodOrderListRelationFilter
+           },
+           data: {
+             Status: "Registered"
+           }
+         })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۳:۰۷:۳۰ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:78:35
+
+  75 module.exports.payOrderByUser = async (req, res, next) => {
+  76   try {
+  77     const userId = +req.user.id
+→ 78     const paidOrder = await order.update({
+           where: {
+             userId: 2,
+             Status: "InCart",
+             TotalPrice: {
+               gt: 0
+             },
+         ?   id?: Int,
+         ?   AND?: OrderWhereInput | OrderWhereInput[],
+         ?   OR?: OrderWhereInput[],
+         ?   NOT?: OrderWhereInput | OrderWhereInput[],
+         ?   DeliveredTimeInMinute?: IntFilter | Int,
+         ?   user?: UserRelationFilter | UserWhereInput,
+         ?   foods?: FoodOrderListRelationFilter
+           },
+           data: {
+             Status: "Registered"
+           }
+         })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۳:۱۱:۲۷ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:95:35
+
+  92     )
+  93   )
+  94 
+→ 95 const paidOrder = await order.update({
+       where: {
+         userId: 2,
+         Status: "InCart",
+         TotalPrice: {
+           gt: 0
+         },
+     ?   id?: Int,
+     ?   AND?: OrderWhereInput | OrderWhereInput[],
+     ?   OR?: OrderWhereInput[],
+     ?   NOT?: OrderWhereInput | OrderWhereInput[],
+     ?   DeliveredTimeInMinute?: IntFilter | Int,
+     ?   user?: UserRelationFilter | UserWhereInput,
+     ?   foods?: FoodOrderListRelationFilter
+       },
+       data: {
+         Status: "Registered"
+       }
+     })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۰:۱۰ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:95:35
+
+  92     )
+  93   )
+  94 
+→ 95 const paidOrder = await order.update({
+       where: {
+         userId: 2,
+         Status: "InCart",
+         TotalPrice: {
+           gt: 0
+         },
+     ?   id?: Int,
+     ?   AND?: OrderWhereInput | OrderWhereInput[],
+     ?   OR?: OrderWhereInput[],
+     ?   NOT?: OrderWhereInput | OrderWhereInput[],
+     ?   DeliveredTimeInMinute?: IntFilter | Int,
+     ?   user?: UserRelationFilter | UserWhereInput,
+     ?   foods?: FoodOrderListRelationFilter
+       },
+       data: {
+         Status: "Registered"
+       }
+     })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۵:۰۴ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:95:35
+
+  92     )
+  93   )
+  94 
+→ 95 const paidOrder = await order.update({
+       where: {
+         userId: 2,
+         Status: "InCart",
+     ?   id?: Int,
+     ?   AND?: OrderWhereInput | OrderWhereInput[],
+     ?   OR?: OrderWhereInput[],
+     ?   NOT?: OrderWhereInput | OrderWhereInput[],
+     ?   TotalPrice?: IntFilter | Int,
+     ?   DeliveredTimeInMinute?: IntFilter | Int,
+     ?   user?: UserRelationFilter | UserWhereInput,
+     ?   foods?: FoodOrderListRelationFilter
+       },
+       data: {
+         Status: "Registered"
+       }
+     })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۶:۰۶ ب ظ ================== 
+
+Invalid `order.update()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:95:35
+
+  92     )
+  93   )
+  94 
+→ 95 const paidOrder = await order.update({
+       where: {
+         userId: 2,
+         Status: "InCart",
+     ?   id?: Int,
+     ?   AND?: OrderWhereInput | OrderWhereInput[],
+     ?   OR?: OrderWhereInput[],
+     ?   NOT?: OrderWhereInput | OrderWhereInput[],
+     ?   TotalPrice?: IntFilter | Int,
+     ?   DeliveredTimeInMinute?: IntFilter | Int,
+     ?   user?: UserRelationFilter | UserWhereInput,
+     ?   foods?: FoodOrderListRelationFilter
+       },
+       data: {
+         Status: "Registered"
+       }
+     })
+
+Argument `where` of type OrderWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۶:۱۶ ب ظ ================== 
+paidOrder is not defined
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۸:۲۵ ب ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:47:35
+
+  44     Ok({ operationName: "افزودن غذا به سبد خرید" })
+  45   )
+  46 else {
+→ 47   const newCart = await order.create({
+         data: {
+           userId: 2,
+       +   TotalPrice: Int
+         }
+       })
+
+Argument `TotalPrice` is missing.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۱۸:۵۰ ب ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:47:35
+
+  44     Ok({ operationName: "افزودن غذا به سبد خرید" })
+  45   )
+  46 else {
+→ 47   const newCart = await order.create({
+         data: {
+           userId: 2,
+       +   TotalPrice: Int
+         }
+       })
+
+Argument `TotalPrice` is missing.
+ ================== ۱۴۰۲-۰۹-۰۳ ۱۴:۲۰:۱۷ ب ظ ================== 
+
+Invalid `order.create()` invocation in
+G:\nodejsCode\online_food_api\src\api\v1\controller\order.js:47:35
+
+  44     Ok({ operationName: "افزودن غذا به سبد خرید" })
+  45   )
+  46 else {
+→ 47   const newCart = await order.create({
+         data: {
+           userId: 2,
+       +   TotalPrice: Int
+         }
+       })
+
+Argument `TotalPrice` is missing.

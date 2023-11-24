@@ -39,7 +39,7 @@ module.exports.register = async (req, res, next) => {
         )
       )
 
-    const hashedUserPassword = hashUserPassword(password)
+    const hashedUserPassword = await hashUserPassword(password)
     const newUser = await user.create({
       data: {
         username,
@@ -47,6 +47,7 @@ module.exports.register = async (req, res, next) => {
         password: hashedUserPassword,
         role: "Normal",
       },
+      select: { username: true, fullname: true, role: true },
     })
 
     resposeHandler(res, newUser, Created("کاربر"))
