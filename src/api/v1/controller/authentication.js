@@ -17,7 +17,7 @@ const projectConfig = require("../../../config/index")
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { username, fullname, password, confirmPassword } = req.body
+    const { username, fullname, password, confirmPassword, address } = req.body
 
     if (password != confirmPassword)
       return next(
@@ -46,8 +46,9 @@ module.exports.register = async (req, res, next) => {
         fullname,
         password: hashedUserPassword,
         role: "Normal",
+        address,
       },
-      select: { username: true, fullname: true, role: true },
+      select: { username: true, fullname: true, role: true, address: true },
     })
 
     resposeHandler(res, newUser, Created("کاربر"))

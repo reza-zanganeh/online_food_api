@@ -5,6 +5,7 @@ module.exports.registerVS = {
   fullname: required("نام و نام خانوادگی", "body"),
   password: password("body"),
   confirmPassword: password("body"),
+  address: required("ادرس", "body"),
 }
 
 module.exports.loginVS = {
