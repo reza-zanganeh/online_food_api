@@ -1,17 +1,14 @@
 const express = require("express")
+const path = require("path")
 const { checkSchema } = require("express-validator")
 const { expressValidationResultHandler } = require("../helpers/responseHandler")
 const { modelName } = require("../../../config/Constant")
 const { foodModelName } = modelName
 const { isAuthenticate } = require("../middleware/athentication")
+const { updateConrtoller: updateFood, deleteController: deleteFood } =
+  require("../helpers/controllerCRUDoperation")(foodModelName)
 
-const {
-  createController: createFood,
-  readRecordsSortedByDateWithPaginationController: getFoods,
-  updateConrtoller: updateFood,
-  deleteController: deleteFood,
-  readWithIdController: getFoodById,
-} = require("../helpers/controllerCRUDoperation")(foodModelName)
+const { createFood, getFoods } = require("../controller/food")
 
 const {
   createFoodSV,
@@ -24,7 +21,7 @@ const { hasAccessToAdminOperation } = require("../middleware/accessControl")
 
 const foodRouter = express.Router()
 
-foodRouter.get("/", getFoods.bind(null, 10))
+foodRouter.get("/", getFoods)
 
 foodRouter.post(
   "/admin",
@@ -32,7 +29,7 @@ foodRouter.post(
   hasAccessToAdminOperation,
   checkSchema(createFoodSV),
   expressValidationResultHandler,
-  createFood.bind(null, ["name", "price", "availableCount", "description"])
+  createFood
 )
 
 foodRouter.delete(

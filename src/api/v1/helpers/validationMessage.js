@@ -1,4 +1,5 @@
 module.exports.empty = (fieldName) => `مقدار ${fieldName} ارسال نشده است`
+module.exports.emptyIdField = (fieldName) => `شناسه ${fieldName} ارسال نشده است`
 module.exports.invalid = (fieldName) => `مقدار ${fieldName} اشتباه است`
 module.exports.limitLegth = (fieldName, min, max) => {
   if (min && max)

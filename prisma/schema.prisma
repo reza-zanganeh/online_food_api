@@ -54,6 +54,15 @@ model Food {
   likes          Like[]
   disLikes       disLike[]
   comments       Comment[]
+  image          FoodImage?
+}
+
+model FoodImage {
+  id             Int     @id @default(autoincrement())
+  food           Food?   @relation(fields: [foodId], references: [id])
+  foodId         Int?    @unique
+  url            String
+  isDefaultImage Boolean @default(false)
 }
 
 model FoodOrder {

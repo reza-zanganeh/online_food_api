@@ -1,4 +1,9 @@
-const { empty, invalid, limitLegth } = require("./validationMessage")
+const {
+  empty,
+  invalid,
+  limitLegth,
+  emptyIdField,
+} = require("./validationMessage")
 const { readOne, count } = require("../helpers/prisma")
 
 module.exports.email = (location) => ({
@@ -204,7 +209,7 @@ module.exports.checkExistsObjectWithIdInDb = (
       checkFalsy: true,
       checkNull: true,
     },
-    errorMessage: empty(MODELNAME.persian),
+    errorMessage: emptyIdField(MODELNAME.persian),
   },
   custom: {
     options: async (id, { req }) => {
