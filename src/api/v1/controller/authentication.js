@@ -88,6 +88,7 @@ module.exports.login = async (req, res, next) => {
         expiresTimeInMilisecond:
           projectConfig.authentication
             .authenticationTokenExpiresTimeInMilisecond,
+        role: userInformtaion.role,
       },
       Ok({ operationName: "ورود" })
     )
