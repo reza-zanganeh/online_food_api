@@ -1,1 +1,20 @@
 online food api is a simple express api to presenting  in university
+- authentication
+  -  register
+  -  login
+  -  get user information
+- food
+  - get food
+  - add food
+  - update price food
+  - update available count
+  - delete food
+- order
+  - get order by admin
+  - approve order by admin
+  - pay order
+  - get my cart
+  - remove from cart
+- upload
+  - upload food image
+  - upload default food image
